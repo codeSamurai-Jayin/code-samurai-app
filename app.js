@@ -20,7 +20,7 @@ function databaseInitialize() {
     Item = db.getCollection("items");
     if (User === null) {
         User = db.addCollection("users");
-        User.insert({username:'admin',password:'admin'});
+        User.insert({username:'Jayin',password:'coding'});
         User.insert({username:'user',password:'user'});
     }
     if (Item === null) {
@@ -105,6 +105,17 @@ app.post('/login', function (request, response) {
     var loginName = request.body.loginName;
     var password = request.body.password;
 
+    var success = userPasswordMatch(loginName, password);
+
+    if(success == true) {
+
+        response.render('listpage', {items: Item.find()});
+    }
+    else{
+
+        response.render('index', {message:  "Invalid user name or password"});
+    }
+
     // save login name in session so it's available later
     request.session.user = loginName;
 
@@ -120,9 +131,11 @@ app.post('/login', function (request, response) {
 // when save button is clicked on add page
 app.post('/saveitem', function (request, response) {
 
+
     // hint #1: find the helper function that will help save the information first
     // hint #2: make sure to send the list of items to the list page
+   var items = saveFormAndReturnAllItems(request.body);
 
-    response.render('listpage',{ items:[] });
+    response.render('listpage',{ items:items });
 });
 

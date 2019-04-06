@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="blue">
 <head> <% include ./head %> </head>
 <body>
 <% include ./header %>
@@ -10,17 +10,31 @@
 
     <table class="highlight">
         <tr>
-            <th>Song</th><th>Singer</th><th>Added By</th><th>Likes</th><th>Actions</th>
+            <th>Video game</th><th>Developer</th><th>Added By</th><th>Date added</th><th>URL<th>Action</th>
         </tr>
 
         <% items.forEach(function(item){  %>
+         <tr>
 
+
+            <td> <%=   item.videoGame %></td>
+            <td> <%=   item.developer %></td>
+            <td> <%=   item.addedBy %></td>
+            <td> <%=   item.dateAdded %></td>
+            <td> <a href=<%=   item.URL %> target="opensesame">Game URL </a></td>
+            <td>
+                <i class="material-icons">delete<i>
+                    <i class="material-icons">favorite</i>
+
+
+        </tr>
 
 
 
 
         <% }) %>
     </table>
+
 
     </div>
 
