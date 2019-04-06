@@ -95,6 +95,7 @@ app.get('/', function (request, response) {
 
 // when the link Add New Item is clicked - links or <a> tags always send "get" not "post"
 app.get('/additem', function (request, response) {
+    console.log(request.session.user)
     response.render('addpage',{loginName:request.session.user});
 });
 
@@ -108,22 +109,13 @@ app.post('/login', function (request, response) {
     var success = userPasswordMatch(loginName, password);
 
     if(success == true) {
-
+         request.session.user = loginName;
         response.render('listpage', {items: Item.find()});
+
     }
     else{
-
         response.render('index', {message:  "Invalid user name or password"});
     }
-
-    // save login name in session so it's available later
-    request.session.user = loginName;
-
-    //hint: check is password is good or not, if not load same page with error as below
-    //response.render('index', {message: "Invalid user name or password"});
-
-    response.render('listpage', {items: Item.find()});
-
 });
 
 
@@ -138,4 +130,21 @@ app.post('/saveitem', function (request, response) {
 
     response.render('listpage',{ items:items });
 });
+
+app.get('/delete', function (request, response) {
+        var game = request.query.game;
+       var items = deleteAndSort('videoGame', game);
+
+
+    response.render('listpage',{ items:items });
+});
+
+app.get('/like', function (request, response) {
+        var game = request.query.game;
+       var items = likeAndSort('videoGame', game);
+
+
+    response.render('listpage',{ items:items });
+});
+
 

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="blue">
+<html class="red">
 <head> <% include ./head %> </head>
 <body>
 <% include ./header %>
@@ -21,10 +21,11 @@
             <td> <%=   item.developer %></td>
             <td> <%=   item.addedBy %></td>
             <td> <%=   item.dateAdded %></td>
-            <td> <a href=<%=   item.URL %> target="opensesame">Game URL </a></td>
+            <td> <a href=<%=item.URL %> target="opensesame">Game URL </a></td>
             <td>
-                <i class="material-icons">delete<i>
-                    <i class="material-icons">favorite</i>
+                <a href="/delete?game=<%=item.videoGame %>"><i class="material-icons">delete<i></a>
+                    <a href="/like?game=<%=item.videoGame %>"><i class="material-icons">favorite</i></a>
+                    </td>
 
 
         </tr>
